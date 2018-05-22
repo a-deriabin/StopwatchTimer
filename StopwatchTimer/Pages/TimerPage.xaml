@@ -1,0 +1,30 @@
+﻿<Page x:Class="StopwatchTimer.Pages.TimerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StopwatchTimer.Pages"
+      mc:Ignorable="d"
+      Title="TimerPage" Width="288.167" Height="242.923">
+
+    <Grid>
+
+        <TextBlock x:Name="_TimeLabelTextBlock" HorizontalAlignment="Left" Margin="10,49,0,66.2" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" Height="128" Width="148" TextAlignment="Left">
+            Now:<LineBreak />
+            Finishes at:<LineBreak />
+            Time left:
+        </TextBlock>
+        <TextBlock x:Name="_TimeTextBlock" HorizontalAlignment="Left" Margin="176,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="96" Width="114">
+            22:10:09 <LineBreak />
+            23:14:00 <LineBreak />
+            01:03:51
+        </TextBlock>
+
+        <TextBox x:Name="_TxtFinishTime" HorizontalAlignment="Left" Height="34" Margin="163,83,0,0" TextWrapping="Wrap" Text="23:14:00" VerticalAlignment="Top" Width="115" FontSize="24" TextAlignment="Center" TextChanged="_TxtFinishTime_TextChanged" SelectionChanged="_TxtFinishTime_SelectionChanged" LostFocus="_TxtFinishTime_LostFocus"/>
+        <TextBox x:Name="_TxtLeftTime" HorizontalAlignment="Left" Height="34" Margin="163,117,0,0" TextWrapping="Wrap" Text="01:43:21" VerticalAlignment="Top" Width="115" TextAlignment="Center" FontSize="24" TextChanged="_TxtLeftTime_TextChanged" SelectionChanged="_TxtLeftTime_SelectionChanged"  LostFocus="_TxtLeftTime_LostFocus" />
+
+
+        <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStart_Click"/>
+        <Button x:Name="_BtnStop" Content="Stop" HorizontalAlignment="Left" Margin="147,201,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStop_Click"/>
+    </Grid>
+</Page>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="StopwatchTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StopwatchTimer"
+        mc:Ignorable="d"
+        Title="Stopwatch/Timer" Height="300" Width="300" ResizeMode="CanMinimize">
+    <Grid>
+
+        
+        <DockPanel LastChildFill="True" Margin="0,0,0,0" >
+            <Menu x:Name="_MenuBar" DockPanel.Dock="Top" Width="Auto" Height="20" BorderThickness="0" Background="#FFF9F9F9">
+                <MenuItem Header="Settings">
+                    <MenuItem x:Name="TopmostBtn" Header="Stay on top"
+                              HorizontalAlignment="Left"
+                              Click="Topmost_Click" IsChecked="False" />
+                </MenuItem>
+                <MenuItem Name="SwitchBtn" Header="Switch to _timer"
+                          Click="SwitchBtn_Click" MouseLeave="SwitchBtn_MouseLeave" />
+                <MenuItem Header="?" Click="About_Click" />
+            </Menu>
+
+            <Frame DockPanel.Dock="Bottom" Name="_mainFrame"
+                   VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" />
+        </DockPanel>
+
+    </Grid>
+</Window>

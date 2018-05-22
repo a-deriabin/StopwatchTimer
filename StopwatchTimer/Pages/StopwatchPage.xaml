@@ -1,0 +1,28 @@
+﻿<Page x:Class="StopwatchTimer.Pages.StopwatchPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" d:DesignWidth="280"
+      Title="StopwatchPage" Height="235.963">
+
+    <Grid>
+        <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStart_Click" FontSize="14"/>
+        <Button x:Name="_BtnStop" Content="Stop" HorizontalAlignment="Left" Margin="137,47,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStop_Click" FontSize="14"/>
+        <Button x:Name="_BtnClear" Content="Clear" HorizontalAlignment="Left" Margin="137,84,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnClear_Click" FontSize="14"/>
+        <GroupBox x:Name="_SavesGroupBox" Header="My saves" HorizontalAlignment="Left" Height="124" Margin="-2,121,-14,-9" VerticalAlignment="Top" Width="296">
+            <DockPanel Margin="0,0,0,4">
+                <ListBox DockPanel.Dock="Top" x:Name="SavesList" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Margin="0,0,0,3" Width="277" SelectionChanged="SavesList_SelectionChanged"/>
+                <Button x:Name="BtnSave" Content="Save" Width="139" Margin="0,-0.2" Click="BtnSave_Click"/>
+                <Button DockPanel.Dock="Bottom" x:Name="BtnDeleteSave" Content="Delete" Margin="3,0,6.2,-0.4"/>
+            </DockPanel>
+        </GroupBox>
+        <TextBlock x:Name="TimeTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20">
+            0 Hours <LineBreak />
+            0 Minutes <LineBreak />
+            0 Seconds <LineBreak />
+            000 ms.
+        </TextBlock>
+
+    </Grid>
+</Page>
