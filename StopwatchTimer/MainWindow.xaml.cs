@@ -22,7 +22,7 @@ namespace StopwatchTimer
     public partial class MainWindow : Window
     {
         private Page stopwatchPage = new StopwatchPage();
-        private Page timerPage = new TimerPage();
+        private Page timerPage = new TimerPageNew();
         private Page currentPage = null;
         private PageType curPageType = PageType.Stopwatch;
 

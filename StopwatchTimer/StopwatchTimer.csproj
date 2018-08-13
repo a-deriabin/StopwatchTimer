@@ -56,6 +56,9 @@
     </ApplicationDefinition>
     <Compile Include="IPausable.cs" />
     <Compile Include="Pages\TimerPage.InputLogic.cs" />
+    <Compile Include="Pages\TimerPageNew.xaml.cs">
+      <DependentUpon>TimerPageNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageType.cs" />
     <Compile Include="Pages\TimerPage.xaml.cs">
       <DependentUpon>TimerPage.xaml</DependentUpon>
@@ -79,6 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TimerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TimerPageNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
