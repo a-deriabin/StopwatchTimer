@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StopwatchTimer.Pages"
       mc:Ignorable="d" 
-      Title="TimerPageNew" Width="288.167" Height="242.923">
+      Title="TimerPageNew" Width="288.167" Height="242.923" Unloaded="Page_Unloaded">
 
     <Grid>
         <Rectangle Fill="#FFFFFFFF" Height="55" Margin="39,89,39,0" Stroke="Black" VerticalAlignment="Top"/>
@@ -14,8 +14,8 @@
         <TextBox x:Name="_TxtMinutes" HorizontalAlignment="Left" Height="55" Margin="119,93,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="#00ABADB3" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" GotFocus="TxtInputGotFocus" LostFocus="TxtInputLostFocus" TextChanged="_TxtMinutes_TextChanged" />
         <TextBox x:Name="_TxtSeconds" HorizontalAlignment="Left" Height="55" Margin="184,93,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="#00ABADB3" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" LostFocus="TxtInputLostFocus" GotFocus="TxtInputGotFocus" TextChanged="TxtInputTextChanged" />
         <Label x:Name="_Separator2" Content=":" HorizontalAlignment="Left" Margin="169,89,0,0" VerticalAlignment="Top" FontSize="30" Height="52" Width="15"/>
-        <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="132" Height="32" FontSize="14"/>
-        <Button x:Name="_BtnStop" Content="Stop" HorizontalAlignment="Left" Margin="147,185,0,0" VerticalAlignment="Top" Width="132" Height="32" FontSize="14"/>
+        <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="132" Height="32" FontSize="14" Click="_BtnStart_Click"/>
+        <Button x:Name="_BtnStop" Content="Stop" HorizontalAlignment="Left" Margin="147,185,0,0" VerticalAlignment="Top" Width="132" Height="32" FontSize="14" IsEnabled="False" Click="_BtnStop_Click" />
 
     </Grid>
 </Page>

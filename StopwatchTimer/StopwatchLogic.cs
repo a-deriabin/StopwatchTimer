@@ -11,7 +11,7 @@ namespace StopwatchTimer
         private DateTime whenStarted = default(DateTime);
         private DateTime whenStopped = default(DateTime);
 
-        public bool IsStarted { get; private set; }
+        public bool IsStarted { get; private set; } = false;
 
         public TimeSpan Time
         {

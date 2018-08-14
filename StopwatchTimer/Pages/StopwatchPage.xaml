@@ -7,9 +7,30 @@
       Title="StopwatchPage" Height="235.963">
 
     <Grid>
-        <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStart_Click" FontSize="14"/>
-        <Button x:Name="_BtnStop" Content="Stop" HorizontalAlignment="Left" Margin="137,47,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStop_Click" FontSize="14"/>
-        <Button x:Name="_BtnClear" Content="Clear" HorizontalAlignment="Left" Margin="137,84,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnClear_Click" FontSize="14"/>
+        <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStart_Click" FontSize="14" BorderBrush="#FF707070">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC7C7C7" Offset="1"/>
+                    <GradientStop Color="#FFEEEAEA"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="_BtnStop" Content="Stop" HorizontalAlignment="Left" Margin="137,47,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnStop_Click" FontSize="14">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC7C7C7" Offset="1"/>
+                    <GradientStop Color="#FFEEEAEA"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="_BtnClear" Content="Clear" HorizontalAlignment="Left" Margin="137,84,0,0" VerticalAlignment="Top" Width="132" Height="32" Click="BtnClear_Click" FontSize="14">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC7C7C7" Offset="1"/>
+                    <GradientStop Color="#FFEEEAEA"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <GroupBox x:Name="_SavesGroupBox" Header="My saves" HorizontalAlignment="Left" Height="124" Margin="-2,121,-14,-9" VerticalAlignment="Top" Width="296">
             <DockPanel Margin="0,0,0,4">
                 <ListBox DockPanel.Dock="Top" x:Name="SavesList" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Margin="0,0,0,3" Width="277" SelectionChanged="SavesList_SelectionChanged"/>

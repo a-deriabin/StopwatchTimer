@@ -13,6 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace StopwatchTimer.Pages
 {
@@ -21,11 +26,38 @@ namespace StopwatchTimer.Pages
     /// </summary>
     public partial class TimerPageNew : Page, IPausable
     {
+        private TimerLogic timerLogic = new TimerLogic();
         private bool didInit = false;
+
+        private DispatcherTimer updateTimer = null;
+        private Notifier notifier = null;
 
         public TimerPageNew()
         {
             InitializeComponent();
+
+            // UI updating timer
+            updateTimer = new DispatcherTimer();
+            updateTimer.Tick += delegate (object sender, EventArgs e)
+            {
+                UpdateTime();
+                if (timerLogic.IsFininshed)
+                    TimerFinished();
+            };
+
+            // For Windows toast notifications
+            notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new PrimaryScreenPositionProvider(Corner.BottomRight, 0, 0);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
+
+            // Done initializing UI
             didInit = true;
         }
 
@@ -93,6 +125,67 @@ namespace StopwatchTimer.Pages
             TxtInputTextChanged(sender, e);
             if (isLastCol || _TxtMinutes.Text.Length == 2)
                 _TxtSeconds.Focus();
+        }
+
+        private void _BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            int hours = int.Parse(_TxtHours.Text);
+            int minutes = int.Parse(_TxtMinutes.Text);
+            int seconds = int.Parse(_TxtSeconds.Text);
+
+            timerLogic.Start(hours, minutes, seconds);
+            updateTimer.Start();
+
+            _BtnStart.IsEnabled = false;
+            _BtnStop.IsEnabled = true;
+        }
+
+        private void _BtnStop_Click(object sender, RoutedEventArgs e)
+        {
+            timerLogic.Stop();
+            updateTimer.Stop();
+            UpdateTime();
+
+            _BtnStart.IsEnabled = true;
+            _BtnStop.IsEnabled = false;
+        }
+
+        private void UpdateTime()
+        {
+            var timeLeft = timerLogic.TimeLeft;
+
+            // Round to larger
+            if (timeLeft.Milliseconds > 0)
+                timeLeft += new TimeSpan(0, 0, 1);
+
+            _TxtHours.Text = FormatNum(timeLeft.Hours);
+            _TxtMinutes.Text = FormatNum(timeLeft.Minutes);
+            _TxtSeconds.Text = FormatNum(timeLeft.Seconds);
+        }
+
+        private string FormatNum(int timeNum)
+        {
+            if (timeNum == 0)
+                return "00";
+            if (timeNum < 10)
+                return "0" + timeNum;
+            return timeNum.ToString();
+        }
+
+        private void TimerFinished()
+        {
+            updateTimer.Stop();
+            timerLogic.Stop();
+            _BtnStop.IsEnabled = false;
+
+            notifier.ShowInformation("Finished");
+
+            _BtnStart.IsEnabled = true;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            notifier.Dispose();
         }
     }
 }
