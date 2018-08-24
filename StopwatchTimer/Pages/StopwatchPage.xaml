@@ -34,8 +34,22 @@
         <GroupBox x:Name="_SavesGroupBox" Header="My saves" HorizontalAlignment="Left" Height="124" Margin="-2,121,-14,-9" VerticalAlignment="Top" Width="296">
             <DockPanel Margin="0,0,0,4">
                 <ListBox DockPanel.Dock="Top" x:Name="SavesList" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Margin="0,0,0,3" Width="277" SelectionChanged="SavesList_SelectionChanged"/>
-                <Button x:Name="BtnSave" Content="Save" Width="139" Margin="0,-0.2" Click="BtnSave_Click"/>
-                <Button DockPanel.Dock="Bottom" x:Name="BtnDeleteSave" Content="Delete" Margin="3,0,6.2,-0.4"/>
+                <Button x:Name="BtnSave" Content="Save" Width="139" Margin="0,-0.2" Click="BtnSave_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFC7C7C7" Offset="1"/>
+                            <GradientStop Color="#FFEEEAEA"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button DockPanel.Dock="Bottom" x:Name="BtnDeleteSave" Content="Delete" Margin="3,0,6.2,-0.4" Click="BtnDeleteSave_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFC7C7C7" Offset="1"/>
+                            <GradientStop Color="#FFEEEAEA"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </DockPanel>
         </GroupBox>
         <TextBlock x:Name="TimeTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20">

@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,15 +61,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="IPausable.cs" />
-    <Compile Include="Pages\TimerPage.InputLogic.cs" />
+    <Compile Include="IChangeableIcon.cs" />
+    <Compile Include="IClosable.cs" />
+    <Compile Include="IFocusable.cs" />
     <Compile Include="Pages\TimerPageNew.xaml.cs">
       <DependentUpon>TimerPageNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageType.cs" />
-    <Compile Include="Pages\TimerPage.xaml.cs">
-      <DependentUpon>TimerPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SavedData.cs" />
     <Compile Include="StopwatchLogic.cs" />
     <Compile Include="TimerLogic.cs" />
@@ -85,10 +84,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\StopwatchPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\TimerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,7 +113,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Pages\TimerPage.InputLogic.LockSystem.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -127,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icon_simple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icon_notify.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

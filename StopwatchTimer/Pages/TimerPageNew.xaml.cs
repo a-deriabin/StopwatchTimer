@@ -24,7 +24,7 @@ namespace StopwatchTimer.Pages
     /// <summary>
     /// Interaction logic for TimerPageNew.xaml
     /// </summary>
-    public partial class TimerPageNew : Page, IPausable
+    public partial class TimerPageNew : Page, IClosable, IFocusable
     {
         private TimerLogic timerLogic = new TimerLogic();
         private bool didInit = false;
@@ -32,12 +32,16 @@ namespace StopwatchTimer.Pages
         private DispatcherTimer updateTimer = null;
         private Notifier notifier = null;
 
-        public TimerPageNew()
+        private IChangeableIcon parentWindow;
+
+        public TimerPageNew(IChangeableIcon parentWindow)
         {
             InitializeComponent();
+            this.parentWindow = parentWindow;
 
             // UI updating timer
             updateTimer = new DispatcherTimer();
+            updateTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             updateTimer.Tick += delegate (object sender, EventArgs e)
             {
                 UpdateTime();
@@ -50,8 +54,11 @@ namespace StopwatchTimer.Pages
             {
                 cfg.PositionProvider = new PrimaryScreenPositionProvider(Corner.BottomRight, 0, 0);
 
+                //cfg.LifetimeSupervisor = new CountBasedLifetimeSupervisor(
+                //    MaximumNotificationCount.FromCount(5));
+
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
-                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    notificationLifetime: TimeSpan.FromSeconds(10000),
                     maximumNotificationCount: MaximumNotificationCount.FromCount(5));
 
                 cfg.Dispatcher = Application.Current.Dispatcher;
@@ -61,15 +68,8 @@ namespace StopwatchTimer.Pages
             didInit = true;
         }
 
-        void IPausable.ContinueActions()
-        {
-            //throw new NotImplementedException();
-        }
-
-        void IPausable.PauseActions()
-        {
-            //throw new NotImplementedException();
-        }
+        //---------------------
+        // UI action handlers
 
         private void TxtInputGotFocus(object sender, RoutedEventArgs e)
         {
@@ -133,22 +133,22 @@ namespace StopwatchTimer.Pages
             int minutes = int.Parse(_TxtMinutes.Text);
             int seconds = int.Parse(_TxtSeconds.Text);
 
-            timerLogic.Start(hours, minutes, seconds);
-            updateTimer.Start();
-
-            _BtnStart.IsEnabled = false;
-            _BtnStop.IsEnabled = true;
+            TimerEnabled(hours, minutes, seconds);
+            FinishNotify();
         }
 
         private void _BtnStop_Click(object sender, RoutedEventArgs e)
         {
-            timerLogic.Stop();
-            updateTimer.Stop();
-            UpdateTime();
-
-            _BtnStart.IsEnabled = true;
-            _BtnStop.IsEnabled = false;
+            TimerDisabled();
         }
+
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            FinishNotify();
+        }
+
+        //----------------------
+        // Internal logic
 
         private void UpdateTime()
         {
@@ -174,18 +174,80 @@ namespace StopwatchTimer.Pages
 
         private void TimerFinished()
         {
-            updateTimer.Stop();
-            timerLogic.Stop();
-            _BtnStop.IsEnabled = false;
-
-            notifier.ShowInformation("Finished");
-
-            _BtnStart.IsEnabled = true;
+            TimerDisabled();
+            Notify();
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        private void SetInputEnabled(bool isEnabled)
         {
-            notifier.Dispose();
+            _TxtHours.Focusable = isEnabled;
+            _TxtHours.IsReadOnly = !isEnabled;
+
+            _TxtMinutes.Focusable = isEnabled;
+            _TxtMinutes.IsReadOnly = !isEnabled;
+
+            _TxtSeconds.Focusable = isEnabled;
+            _TxtSeconds.IsReadOnly = !isEnabled;
+        }
+
+        private void TimerEnabled(int hours, int minutes, int seconds)
+        {
+            timerLogic.Start(hours, minutes, seconds);
+            updateTimer.Start();
+
+            _BtnStart.IsEnabled = false;
+            _BtnStop.IsEnabled = true;
+            SetInputEnabled(false);
+        }
+
+        private void TimerDisabled()
+        {
+            updateTimer.Stop();
+            timerLogic.Stop();
+            UpdateTime();
+
+            _BtnStart.IsEnabled = true;
+            _BtnStop.IsEnabled = false;
+            SetInputEnabled(true);
+        }
+
+        private bool isNotifyShown = false;
+
+        private void Notify()
+        {
+            notifier.ShowInformation("Finished");
+            parentWindow.ChangeIcon("Assets/icon_notify.png");
+            isNotifyShown = true;
+        }
+
+        private void FinishNotify()
+        {
+            if (!isNotifyShown)
+                return;
+
+            if (notifier != null)
+                notifier.ClearMessages();
+            parentWindow.ChangeIcon("Assets/icon_simple.png");
+            isNotifyShown = false;
+        }
+
+        //--------------
+        // Interface implementations
+
+        void IClosable.OnAppClosed()
+        {
+            if (notifier != null)
+                notifier.Dispose();
+        }
+
+        void IFocusable.OnGotFocus()
+        {
+            FinishNotify();
+        }
+
+        void IFocusable.OnLostFocus()
+        {
+            // Do nothing
         }
     }
 }

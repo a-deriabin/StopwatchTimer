@@ -20,7 +20,7 @@ namespace StopwatchTimer.Pages
     /// <summary>
     /// Interaction logic for StopwatchPage.xaml
     /// </summary>
-    public partial class StopwatchPage : Page, IPausable
+    public partial class StopwatchPage : Page
     {
         private StopwatchLogic stopwatch = new StopwatchLogic();
         private DispatcherTimer updateTimer = null;
@@ -66,8 +66,14 @@ namespace StopwatchTimer.Pages
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             string timeStr = CurTimeToInlineStr();
-            //SavesList.Items.Insert(0, timeStr);
             SavedData.AddSavedTime(timeStr);
+            LoadSavedTimes();
+        }
+
+        private void BtnDeleteSave_Click(object sender, RoutedEventArgs e)
+        {
+            int id = SavesList.SelectedIndex;
+            SavedData.RemoveSavedTime(id);
             LoadSavedTimes();
         }
 
@@ -122,23 +128,6 @@ namespace StopwatchTimer.Pages
             bool enableBtn = (SavesList.SelectedIndex >= 0 &&
                 SavesList.SelectedIndex < SavesList.Items.Count);
             BtnDeleteSave.IsEnabled = enableBtn;
-        }
-
-        //-----------------------------
-        // IPausable implementation
-
-        private bool wasStartedWhenPaused = false;
-
-        public void PauseActions()
-        {
-            wasStartedWhenPaused = stopwatch.IsStarted;
-            BtnStop_Click(null, null);
-        }
-
-        public void ContinueActions()
-        {
-            if (wasStartedWhenPaused)
-                BtnStart_Click(null, null);
         }
     }
 }

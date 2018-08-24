@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StopwatchTimer
 {
-    interface IPausable
+    interface IFocusable
     {
-        void PauseActions();
-        void ContinueActions();
+        void OnGotFocus();
+        void OnLostFocus();
     }
 }

@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StopwatchTimer"
         mc:Ignorable="d"
-        Title="Stopwatch/Timer" Height="300" Width="300" ResizeMode="CanMinimize">
+        Title="Stopwatch/Timer" Height="300" Width="300" ResizeMode="CanMinimize" Closed="Window_Closed" Activated="Window_Activated" Deactivated="Window_Deactivated" Icon="Assets/icon_simple.png" VisualBitmapScalingMode="HighQuality">
     <Grid>
-
-        
-        <DockPanel LastChildFill="True" Margin="0,0,0,0" >
-            <Menu x:Name="_MenuBar" DockPanel.Dock="Top" Width="Auto" Height="20" BorderThickness="1" Background="#FFF3F3F3" BorderBrush="#FFE0E0E0">
+        <DockPanel LastChildFill="True" Margin="0,0,-0.4,0.4" Grid.ColumnSpan="2" >
+            <Menu x:Name="_MenuBar" DockPanel.Dock="Top" Width="Auto" Height="20" BorderThickness="1" Background="#FFF7F7F7" BorderBrush="#FFE0E0E0">
                 <MenuItem Header="Settings">
                     <MenuItem x:Name="TopmostBtn" Header="Stay on top"
                               HorizontalAlignment="Left"
