@@ -98,6 +98,17 @@ namespace StopwatchTimer
                     ((IFocusable)page).OnLostFocus();
         }
 
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.S)
+                return;
+
+            if (curPageType == PageType.Stopwatch)
+                SetPage(PageType.Timer);
+            else
+                SetPage(PageType.Stopwatch);
+        }
+
         //-------------------------------
         // Main window logic
 
