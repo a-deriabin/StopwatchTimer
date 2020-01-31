@@ -31,7 +31,7 @@ namespace StopwatchTimer
         public MainWindow()
         {
             InitializeComponent();
-            pages = new Page[] { new StopwatchPage(), new TimerPageNew(this) };
+            pages = new Page[] { new StopwatchPage(), new TimerPageNew(this, this) };
 
             // Prepare UI
             SetPage(PageType.Stopwatch);

@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StopwatchTimer.Pages"
       mc:Ignorable="d" 
-      Title="TimerPageNew" Width="288.167" Height="242.923">
+      Title="TimerPageNew" Width="288.167" Height="242.923" Focusable="False">
 
-    <Grid MouseMove="Grid_MouseMove">
+    <Grid MouseMove="Grid_MouseMove" KeyUp="Grid_KeyUp" Focusable="False">
         <Rectangle Fill="#FFFFFFFF" Height="55" Margin="39,79,39,0" Stroke="Black" VerticalAlignment="Top"/>
-        <TextBox x:Name="_TxtHours" HorizontalAlignment="Left" Height="55" Margin="49,82,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="{x:Null}" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" GotFocus="TxtInputGotFocus" LostFocus="TxtInputLostFocus" TextChanged="_TxtHours_TextChanged" />
+        <TextBox x:Name="_TxtHours" HorizontalAlignment="Left" Height="55" Margin="49,82,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="{x:Null}" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" GotFocus="TxtInputGotFocus" LostFocus="TxtInputLostFocus" TextChanged="_TxtHours_TextChanged" KeyUp="_TxtHours_KeyUp" />
         <Label x:Name="_Separator1" Content=":" HorizontalAlignment="Left" Margin="104,79,0,0" VerticalAlignment="Top" FontSize="30" Height="52" Width="15"/>
-        <TextBox x:Name="_TxtMinutes" HorizontalAlignment="Left" Height="55" Margin="119,82,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="#00ABADB3" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" GotFocus="TxtInputGotFocus" LostFocus="TxtInputLostFocus" TextChanged="_TxtMinutes_TextChanged" />
-        <TextBox x:Name="_TxtSeconds" HorizontalAlignment="Left" Height="55" Margin="184,82,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="#00ABADB3" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" LostFocus="TxtInputLostFocus" GotFocus="TxtInputGotFocus" TextChanged="TxtInputTextChanged" />
+        <TextBox x:Name="_TxtMinutes" HorizontalAlignment="Left" Height="55" Margin="119,82,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="#00ABADB3" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" GotFocus="TxtInputGotFocus" LostFocus="TxtInputLostFocus" TextChanged="_TxtMinutes_TextChanged" KeyUp="_TxtMinutes_KeyUp" />
+        <TextBox x:Name="_TxtSeconds" HorizontalAlignment="Left" Height="55" Margin="184,82,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="50" FontSize="36" TextAlignment="Center" BorderBrush="#00ABADB3" Background="Transparent" SelectionBrush="#FF57C6E8" BorderThickness="0" MaxLength="2" LostFocus="TxtInputLostFocus" GotFocus="TxtInputGotFocus" TextChanged="TxtInputTextChanged" KeyUp="_TxtSeconds_KeyUp" />
         <Label x:Name="_Separator2" Content=":" HorizontalAlignment="Left" Margin="169,79,0,0" VerticalAlignment="Top" FontSize="30" Height="52" Width="15"/>
         <Button x:Name="_BtnStart" Content="Start" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="132" Height="32" FontSize="14" Click="_BtnStart_Click">
             <Button.Background>

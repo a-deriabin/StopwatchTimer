@@ -34,7 +34,7 @@ namespace StopwatchTimer.Pages
 
         private IChangeableIcon parentWindow;
 
-        public TimerPageNew(IChangeableIcon parentWindow)
+        public TimerPageNew(IChangeableIcon parentWindow, Window _parentWindow)
         {
             InitializeComponent();
             this.parentWindow = parentWindow;
@@ -47,6 +47,21 @@ namespace StopwatchTimer.Pages
                 UpdateTime();
                 if (timerLogic.IsFininshed)
                     TimerFinished();
+            };
+
+            // For events
+            _parentWindow.KeyUp += delegate (object sender, KeyEventArgs e)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    if (_BtnStart.IsEnabled)
+                    {
+                        _BtnStart.Focus();
+                        _BtnStart_Click(sender, e);
+                    }
+                    else
+                        _BtnStop_Click(sender, e);
+                }
             };
 
             // For Windows toast notifications
@@ -145,6 +160,35 @@ namespace StopwatchTimer.Pages
         private void Grid_MouseMove(object sender, MouseEventArgs e)
         {
             FinishNotify();
+        }
+
+        private void _TxtHours_KeyUp(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == Key.Enter)
+            //{
+            //    if (_BtnStart.IsEnabled)
+            //    {
+            //        _BtnStart.Focus();
+            //        _BtnStart_Click(sender, e);
+            //    }
+            //    else
+            //        _BtnStop_Click(sender, e);
+            //}
+        }
+
+        private void _TxtMinutes_KeyUp(object sender, KeyEventArgs e)
+        {
+            _TxtHours_KeyUp(sender, e);
+        }
+
+        private void _TxtSeconds_KeyUp(object sender, KeyEventArgs e)
+        {
+            _TxtHours_KeyUp(sender, e);
+        }
+
+        private void Grid_KeyUp(object sender, KeyEventArgs e)
+        {
+            
         }
 
         //----------------------
@@ -249,5 +293,6 @@ namespace StopwatchTimer.Pages
         {
             // Do nothing
         }
+
     }
 }
