@@ -35,6 +35,7 @@ namespace StopwatchTimer.Pages
 
             // Prepare timer
             updateTimer = new DispatcherTimer();
+            updateTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
             updateTimer.Tick += delegate (object sender, EventArgs e)
             {
                 UpdateTimeText();
